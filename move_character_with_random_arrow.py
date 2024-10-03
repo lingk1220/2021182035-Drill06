@@ -1,5 +1,5 @@
 from pico2d import *
-
+import math
 
 TUK_WIDTH, TUK_HEIGHT = 1000, 800
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
@@ -27,25 +27,28 @@ def handle_events():
 def run_destination():
     global pos_character, destination
 
-    if 5 > get_dist(pos_character, destination):
+    if 1 > get_dist(pos_character, destination):
         pos_character = destination
         reset_destination()
     else:
-        pos_character[0] += pos_character[0] - destination[0] // 100
+        pos_character[0] += (destination[0] - pos_character[0]) / 30
+        pos_character[1] += (destination[1] - pos_character[1]) / 30
+
         pass
 
 
 def get_dist(pos_character, destination):
-    return 1
-    pass
+    cx, cy = pos_character[0], pos_character[1]
+    dx, dy = destination[0], destination[1]
+    return math.sqrt(math.pow(dx - cx, 2) + math.pow(dy - cy, 2))
 
 def reset_destination():
     pass
 
 running = True
 frame = 0
-pos_character = {TUK_WIDTH // 2, TUK_HEIGHT // 2}
-destination = {600, 600}
+pos_character = [TUK_WIDTH // 2, TUK_HEIGHT // 2]
+destination = [1000, 10]
 
 hide_cursor()
 
@@ -53,7 +56,7 @@ hide_cursor()
 while running:
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, 400, 400)
+    character.clip_draw(frame * 100, 100 * 1, 100, 100, pos_character[0], pos_character[1])
     update_canvas()
     run_destination()
     frame = (frame + 1) % 8
