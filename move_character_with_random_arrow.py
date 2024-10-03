@@ -50,13 +50,16 @@ destination = {600, 600}
 hide_cursor()
 
 
-while True:
+while running:
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
     character.clip_draw(frame * 100, 100 * 1, 100, 100, 400, 400)
     update_canvas()
-    run_destination();
-    pass
+    run_destination()
+    frame = (frame + 1) % 8
+    delay(0.01)
+    handle_events()
+
 
 close_canvas()
 
