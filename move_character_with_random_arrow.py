@@ -1,5 +1,4 @@
 from random import random, randint
-
 from pico2d import *
 import math
 
@@ -72,8 +71,8 @@ while running:
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
     hand_arrow.draw(destination[0], destination[1])
     character.clip_composite_draw(frame*100, 100 * 1, 100, 100, 0, f, pos_character[0], pos_character[1], 100, 100)
-
     update_canvas()
+
     run_destination()
 
     frame = (frame + 1) % 8
