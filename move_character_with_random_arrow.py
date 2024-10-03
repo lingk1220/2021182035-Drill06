@@ -6,7 +6,7 @@ import math
 TUK_WIDTH, TUK_HEIGHT = 1000, 800
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
 tuk_ground = load_image('TUK_GROUND.png')
-
+hand_arrow = load_image('hand_arrow.png')
 
 
 character = load_image('animation_sheet.png')
@@ -70,7 +70,9 @@ f = ''
 while running:
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+    hand_arrow.draw(destination[0], destination[1])
     character.clip_composite_draw(frame*100, 100 * 1, 100, 100, 0, f, pos_character[0], pos_character[1], 100, 100)
+
     update_canvas()
     run_destination()
 
