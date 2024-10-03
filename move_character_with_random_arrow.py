@@ -31,7 +31,7 @@ def run_destination():
         pos_character = destination
         reset_destination()
     else:
-        #pos_character[0] += pos_character[0] - destination[0] // rate
+        pos_character[0] += pos_character[0] - destination[0] // 100
         pass
 
 
@@ -51,6 +51,10 @@ hide_cursor()
 
 
 while True:
+    clear_canvas()
+    tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+    character.clip_draw(frame * 100, 100 * 1, 100, 100, 400, 400)
+    update_canvas()
     run_destination();
     pass
 
