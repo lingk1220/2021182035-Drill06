@@ -24,24 +24,35 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
 
+def run_destination():
+    global pos_character, destination
+
+    if 5 > get_dist(pos_character, destination):
+        pos_character = destination
+        reset_destination()
+    else:
+        #pos_character[0] += pos_character[0] - destination[0] // rate
+        pass
+
+
+def get_dist(pos_character, destination):
+    return 1
+    pass
+
+def reset_destination():
+    pass
 
 running = True
 frame = 0
-x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
+pos_character = {TUK_WIDTH // 2, TUK_HEIGHT // 2}
+destination = {600, 600}
+
 hide_cursor()
 
 
-
-while running:
-    clear_canvas()
-
-    tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
-
-    update_canvas()
-    handle_events()
-    frame = (frame + 1) % 8
-    delay(0.05)
+while True:
+    run_destination();
+    pass
 
 close_canvas()
 
