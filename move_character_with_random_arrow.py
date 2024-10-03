@@ -26,17 +26,22 @@ def handle_events():
             running = False
 
 def run_destination():
-    global pos_character, destination
+    global pos_character, destination, f
 
     if 1 > get_dist(pos_character, destination):
         pos_character[0] = destination[0]
         pos_character[1] = destination[1]
         reset_destination()
-        print(pos_character)
-        print(destination)
     else:
-        pos_character[0] += (destination[0] - pos_character[0]) / 30
-        pos_character[1] += (destination[1] - pos_character[1]) / 30
+        dx = (destination[0] - pos_character[0])
+        dy = (destination[1] - pos_character[1])
+
+        if(dx > 0): f = ''
+        else: f = 'h'
+
+
+        pos_character[0] += dx / 30
+        pos_character[1] += dy / 30
 
         pass
 
@@ -55,15 +60,17 @@ def reset_destination():
 running = True
 frame = 0
 pos_character = [TUK_WIDTH // 2, TUK_HEIGHT // 2]
-destination = [1000, 10]
+destination = [0, 0]
+reset_destination()
 
 hide_cursor()
 
+f = ''
 
 while running:
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, pos_character[0], pos_character[1])
+    character.clip_composite_draw(frame*100, 100 * 1, 100, 100, 0, f, pos_character[0], pos_character[1], 100, 100)
     update_canvas()
     run_destination()
 
